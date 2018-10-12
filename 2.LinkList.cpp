@@ -5,8 +5,10 @@
 	> Created Time: 2018年10月11日 星期四 20时23分32秒
  ************************************************************************/
 
-#include<iostream>
-
+#include <iostream>
+#include <time.h>
+#include <stdlib.h>
+#include <stdio.h>
 using namespace std;
 
 typedef struct LinkNode {
@@ -15,7 +17,7 @@ typedef struct LinkNode {
 } LinkNode;
 
 typedef struct LinkList {
-    LinkNode head;
+    LinkNode head;    //虚拟节点
     int length;
 } LinkList;
 
@@ -38,7 +40,7 @@ void insert(LinkList *l, int value, int ind) {
     while (ind--) {
         p = p->next;
         if (p == NULL) return ;
-    }
+    }    //找到要插入节点位置的前一个节点，设置虚拟节点可以方便插入秩为0的节点
     LinkNode *new_node = getNewNode(value);
     new_node->next = p->next;
     p->next = new_node;
@@ -62,7 +64,7 @@ void erase(LinkList *l, int ind) {
 
 void clear(LinkList *l) {
     if (l->head.next == NULL) return ;
-    LinkNode *p = head, *q;
+    LinkNode *p = l->head.next, *q;
     while (p) {
         q = p;
         p = p->next;
@@ -97,15 +99,16 @@ int main() {
                 ind = rand() % (length + 1);
                 value = rand() % 100;
                 printf("insert(%d,%d) to LinkList\n", value, ind);
-                l = insert(l,value,ind);
+                insert(l,value,ind);
                 output(l);
-                length += 1;
             }break;
             case 3: {
-                if (length == 0) break;
-                ind = rand() % length;
+                if (l->length == 0) break;
+                ind = rand() % l->length;
                 printf("erase(%d) from LinkList\n", ind);
-            }
+                erase(l, ind);
+                output(l);
+            } break;
         }
     }
     clear(l);

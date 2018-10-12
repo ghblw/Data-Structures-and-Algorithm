@@ -5,8 +5,10 @@
 	> Created Time: 2018年10月11日 星期四 18时56分52秒
  ************************************************************************/
 
-#include<iostream>
-#include<time.h>
+#include <iostream>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #define DEFAULT_ARG(a,b) ((#a)[0] ? a + 0 :b)
 #define init(a) __init(DEFAULT_ARG(a,10))
@@ -18,7 +20,7 @@ typedef struct Vector {
     int size, length;
 } Vector;
 
-Vector *init(int n) {
+Vector *__init(int n) {
     Vector *p = (Vector *)malloc(sizeof(Vector));
     p->data = (int *)malloc(sizeof(int) * n);
     p->size = n;
@@ -80,15 +82,19 @@ int main() {
     for (int t = 0; t < MAX_OP; t++) {
         int op = rand() % 5, ind, value;
         switch (op) {
+            case 4:
+            case 2:
+            case 3:
             case 0: {
                 ind = rand() % (v->length + 3) - 1;//-1~v->length+1;
                 value = rand() % 100;
-                printf("insert(%d %d) = %d to Vector", value, ind, insert(v,value, ind));
+                printf("[%d] insert(%d, %d) to vector\n", insert(v, value, ind), value, ind);
                 output(v);
             } break;
             case 1: {
                 ind = rand() % (v->length + 3) - 1;//-1~v->length+1;
-                printf("erase(%d) = %d to Vector", ind, erase(v,ind);
+                printf("[%d] erase(%d) from vector\n", erase(v, ind), ind);
+                output(v);
             } break;
         }
     }
