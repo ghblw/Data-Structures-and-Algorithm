@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//添加默认参数
 #define DEFAULT_ARG(a,b) ((#a)[0] ? a + 0 :b)
 #define init(a) __init(DEFAULT_ARG(a,10))
 
@@ -76,6 +77,7 @@ void output(Vector *v) {
     }
     printf("]\n");
 }
+
 int main() {
     Vector *v = init();
     #define MAX_OP 30

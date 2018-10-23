@@ -35,7 +35,7 @@ LinkNode *getNewNode(int value) {
     return p;
 }
 
-void insert(LinkList *l, int value, int ind) {
+void insert(LinkList *l, int value, int ind) {//原链表自带虚拟节点，插入操作不会改变虚拟结点的地址，所以不需要返回值
     LinkNode *p = &(l->head);
     while (ind--) {
         p = p->next;
