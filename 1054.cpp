@@ -11,7 +11,7 @@
 #include<stdlib.h>
 #include<math.h>
 #define INF 0x3f3f3f3f
-
+#define MOD 1000000007
 using namespace std;
 
 int calc(const char *str, int l, int r, int a_value) {
@@ -46,9 +46,9 @@ int calc(const char *str, int l, int r, int a_value) {
         switch (str[pos]) {
             case '+': return a + b;
             case '-': return a - b;
-            case '*': return a * b;
+            case '*': return (a % MOD) * (b % MOD);
             case '/': return a / b;
-            case '^': return (int)pow(a,b);
+            case '^': return (int)pow(a,b) % MOD;
             }
     }
     return 0;
@@ -59,16 +59,14 @@ int main () {
     char str[30][1000];
     int flag[30];
     int ans[100];
-    scanf("%[^\n]s", str[0]);
-    //printf("原始%s\n",str[0]);
+    scanf("%[^\r]s", str[0]);
     getchar();
     int n;
     scanf("%d", &n);
     getchar();
     for (int i = 1; i <= n; i++) {
-        scanf("%[^\n]s",str[i]);
+        scanf("%[^\r]s",str[i]);
         getchar();
-        printf("%s\n",str[i]);
         flag[i] = 1;
     }
     int len = strlen(str[0]);
@@ -78,7 +76,6 @@ int main () {
             int len2 = strlen(str[j]);
             int res = calc(str[j], 0, len2 - 1, i);
             if (res != ans[i]) flag[j] = 0;
-            //printf("%d带入 %s=%d\n",i,str[j],res);
         }
     } 
     for (int i = 1; i <= n; i++) {
