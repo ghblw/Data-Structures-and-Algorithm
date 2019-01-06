@@ -6,11 +6,11 @@
  ************************************************************************/
 
 #include<stdio.h>
+#include<stdlib.h>
 #define BASE_CNT 26
 #define BASE 'a'
-
 typedef struct Node {
-    int flag;
+    int flag;//红白节点，是否独立成词
     struct Node *next[26];
 } Node;
 
@@ -57,5 +57,15 @@ int main() {
     Node *root = getNewNode();
     char str[100];
     int op;
-    while (scanf())
+    while (scanf("%d%s", &op, str) != EOF) {
+        switch (op) {
+            case 1: {
+                printf("insert %s to trie\n", str);
+                insert(root, str);
+            } break;
+            case 2: {
+                printf("search %s from trie = %d\n", str, search(root, str));
+            } break;
+        }
+    }
 }

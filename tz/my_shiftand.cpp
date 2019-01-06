@@ -25,7 +25,7 @@ Bitset *init(int n) {
 
 int expand(Bitset *bit, int n) {//扩充n的空间
     int *p = (int *)realloc(bit->data, sizeof(int) * (n + bit->size) + 1);//报realloc的错，改成加１就好了？？？
-    printf("扩充后的空间为%d\n", n + bit->size);
+    //printf("扩充后的空间为%d\n", n + bit->size);
     if (p == NULL) return 0;
     bit->data = p;
     bit->size += n;
@@ -45,12 +45,9 @@ Bitset *Shift(Bitset *a, int n) {
 }
 
 Bitset *And(Bitset *a, Bitset *b) {
-    printf("进行与运算\n");
     if (a->size < b->size) {
-        printf("%d\n", b->size - a->size);
         expand(a, b->size - a->size);
     } else if (a->size > b->size) {
-        printf("%d\n", a->size - b->size);
         expand(b, a->size - b->size);
     }
     int len = a->size;
@@ -61,12 +58,9 @@ Bitset *And(Bitset *a, Bitset *b) {
 }
 
 Bitset *Or(Bitset *a, Bitset *b) {
-    printf("进行或运算\n");
     if (a->size < b->size) {
-        printf("%d\n", b->size - a->size);
         expand(a, b->size - a->size);
     } else if (a->size > b->size) {
-        printf("%d\n", a->size - b->size);
         expand(b, a->size - b->size);
     }
     int len = a->size;
@@ -97,8 +91,6 @@ int ShiftAnd(char *str, char *pattern) {
     Bitset *num2 = init(MAXN);
     num2->data[0] = 1;
     for (int i = 0; str[i]; i++) {
-        printf("文本串第%d个字符为%c\n", i, str[i]);
-        printf("当前状态码为");
         output(p);
         p = And(Or(Shift(p, 1), num2), code[str[i]]);
         if (p->data[len - 1] == 1) {
