@@ -39,10 +39,10 @@ int KMP(char *str, char *pattern) {
     while (str[i]) {
         while (j != -1 && str[i] != pattern[j + 1]) j = next[j];
         if (str[i] == pattern[j + 1]) {
-            j += 1;
+            j += 1;//模式串已匹配下标+1
         }
-        i += 1;
-        if (pattern[j + 1] == 0) return i - strlen(pattern);
+        i += 1;//匹配和失配文本串指针都要+1
+        if (pattern[j + 1] == 0) return i - strlen(pattern);//如果模式串到了结尾，匹配成功
     }
     return -1;
 }

@@ -1,31 +1,29 @@
+ 
 /*************************************************************************
-	> File Name: 12.unstable_sort.cpp
-	> Author:yuxiaowei 
-	> Mail:1147407739@qq.com 
-	> Created Time: 2018年11月04日 星期日 20时35分56秒
+   > File Name: 12.unstable_sort.cpp
+   > Author: hug
+   > Mail:   hug@haizeix.com
+   > Created Time: 日 11/ 4 20:35:49 2018
  ************************************************************************/
 
-#include<iostream>
-#include<stdio.h>
-#include<string.h>
-#include<time.h>
-#include<stdlib.h>
-using namespace std;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
-#define swap(a, b) {\
-    __typeof(a) _temp = a; a = b;b = _temp;\
+#define swap(a, b) { \
+    __typeof(a) _temp = a; a = b; b = _temp; \
 }
 
-#define TEST(arr, n, func, args...) {\
-    int *num = (int *)malloc(sizeof(int) * n);\
-    memcpy(num, arr, sizeof(int) * n);\
-    output(num, n);\
-    printf("%s =  ",#func);\
-    func(args);\
-    output(num, n);\
-    free(num);\
+#define TEST(arr, n, func, args...) { \
+    int *num = (int *)malloc(sizeof(int) * n); \
+    memcpy(num, arr, sizeof(int) * n); \
+    output(num, n); \
+    printf("%s = ", #func); \
+    func(args); \
+    output(num, n); \
+    free(num); \
 }
-
 
 void select_sort(int *num, int n) {
     for (int i = 0; i < n - 1; i++) {
@@ -35,6 +33,7 @@ void select_sort(int *num, int n) {
         }
         swap(num[i], num[ind]);
     }
+    return ;
 }
 
 void quick_sort(int *num, int l, int r) {
@@ -65,11 +64,13 @@ void output(int *num, int n) {
     printf("]\n");
     return ;
 }
+
 int main() {
     srand(time(0));
     #define MAX_OP 20
     int arr[MAX_OP];
     randint(arr, MAX_OP);
     TEST(arr, MAX_OP, select_sort, num, MAX_OP);
-    TEST(arr, MAX_OP, quick_sort, num, 0, MAX_OP - 1);   
+    TEST(arr, MAX_OP, quick_sort, num, 0, MAX_OP - 1);
+    return 0;
 }
