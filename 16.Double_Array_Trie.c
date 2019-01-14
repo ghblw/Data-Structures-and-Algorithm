@@ -64,7 +64,7 @@ int getBase(Node *node, DATNode *trie) {
 
 void Transform(Node *node, DATNode *trie, int ind) {
     if (ind == 1) trie[ind].check = 1;//根节点的父节点是自己
-    if (node->flag) trie[ind].check = -trie[ind].check;//是单词的结尾
+    if (node->flag) trie[ind].check = -trie[ind].check;//是单词的结尾加上负号，上一层已经为check赋值
     trie[ind].base = getBase(node, trie);
     for (int i = 0; i < 26; i++) 
         if (node->next[i] == NULL) continue;
